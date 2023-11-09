@@ -1,20 +1,42 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: TaskStatus;
+}
+
+enum TaskStatus {
+  OPEN = 'OPEN',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
+}
+
 function App() {
-  const [tasks, setTasks] = useState('');
+  const [tasks, setTasks] = useState<Task[] | []>([]);
 
   useEffect(() => {
     fetch('/api/tasks')
-      .then((res) => res.text())
+      .then((res) => {
+        if (res.ok) return res.json();
+        else throw new Error('Failed to fetch data');
+      })
       .then(setTasks);
   }, []);
 
   return (
     <>
       <div>
-        <h1>{tasks}</h1>
-        <h2>NestJS - React - Turbo</h2>
+        <h2>Tasks</h2>
+        {tasks && (
+          <ul>
+            {tasks.map((task) => (
+              <li key={task.id}>{task.title}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
