@@ -6,7 +6,7 @@ import { HTTPMethod } from './types';
 export const TasksAPI = {
   getTasks: async (params?: Params.TasksFilter) => {
     const { data } = await axiosClient<Response.TasksList>({
-      url: '/taks',
+      url: '/tasks',
       method: HTTPMethod.GET,
       params,
     });

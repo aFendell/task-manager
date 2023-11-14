@@ -20,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../..', 'client', 'dist'),
+      renderPath: '/',
     }),
     TasksModule,
   ],
