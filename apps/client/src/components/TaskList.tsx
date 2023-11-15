@@ -1,14 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { TasksAPI } from '../api/methods';
+import * as Params from '../api/params';
+import { TaskStatus } from '../api/types';
+import TaskItem from './TaskItem';
 
 const TaskList = () => {
+  const [status, _setStatus] = useState<TaskStatus | undefined>(undefined);
+  const [search, _setSearch] = useState<string | undefined>(undefined);
+
+  const TasksFilterParams: Params.TasksFilter = {
+    status,
+    search,
+  };
+
   const {
     data: tasks,
     isLoading,
     error,
+    refetch: refetchTasks,
   } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: () => TasksAPI.getTasks(),
+    queryKey: ['tasks', TasksFilterParams],
+    queryFn: () => TasksAPI.getTasks(TasksFilterParams),
+  });
+
+  const { mutate: deleteTask } = useMutation({
+    mutationKey: ['deleteTask'],
+    mutationFn: (id: string) => TasksAPI.deleteTask(id),
+    onSuccess: () => refetchTasks(),
   });
 
   if (isLoading) return <h2>Loading...</h2>;
@@ -22,7 +41,7 @@ const TaskList = () => {
       ) : (
         <ul>
           {tasks?.map((task) => (
-            <li key={task.id}>{task.title}</li>
+            <TaskItem key={task.id} {...task} onDelete={deleteTask} />
           ))}
         </ul>
       )}
