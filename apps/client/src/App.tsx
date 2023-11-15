@@ -1,5 +1,3 @@
-import './App.css';
-
 import Providers from './Providers';
 import TaskList from './components/TaskList';
 

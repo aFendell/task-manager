@@ -39,7 +39,7 @@ const TaskList = () => {
       {!tasks || tasks.length === 0 ? (
         <div>No Tasks To Display</div>
       ) : (
-        <ul>
+        <ul className='flex flex-col gap-3 py-3'>
           {tasks?.map((task) => (
             <TaskItem key={task.id} {...task} onDelete={deleteTask} />
           ))}
