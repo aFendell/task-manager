@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
+
 import { TasksAPI } from '../api/methods';
 import * as Params from '../api/params';
 import { TaskStatus } from '../api/types';
+
 import TaskItem from './TaskItem';
 
 const TaskList = () => {
@@ -20,7 +22,7 @@ const TaskList = () => {
     error,
     refetch: refetchTasks,
   } = useQuery({
-    queryKey: ['tasks', TasksFilterParams],
+    queryKey: ['getTasks', TasksFilterParams],
     queryFn: () => TasksAPI.getTasks(TasksFilterParams),
   });
 
@@ -29,6 +31,10 @@ const TaskList = () => {
     mutationFn: (id: string) => TasksAPI.deleteTask(id),
     onSuccess: () => refetchTasks(),
   });
+
+  const onEditTask = (_id: string) => {
+    // TODO: edit task feature
+  };
 
   if (isLoading) return <h2>Loading...</h2>;
 
@@ -39,11 +45,18 @@ const TaskList = () => {
       {!tasks || tasks.length === 0 ? (
         <div>No Tasks To Display</div>
       ) : (
-        <ul className='flex flex-col gap-3 py-3'>
-          {tasks?.map((task) => (
-            <TaskItem key={task.id} {...task} onDelete={deleteTask} />
-          ))}
-        </ul>
+        <>
+          <ul className='flex flex-col gap-4'>
+            {tasks?.map((task) => (
+              <TaskItem
+                key={task.id}
+                {...task}
+                onDelete={deleteTask}
+                onEdit={onEditTask}
+              />
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
