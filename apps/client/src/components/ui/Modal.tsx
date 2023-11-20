@@ -9,8 +9,8 @@ import {
 } from './Dialog';
 
 type DialogProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
   title?: React.ReactNode;
   description?: React.ReactNode;
   body?: React.ReactNode;
@@ -18,15 +18,15 @@ type DialogProps = {
 };
 
 export const Modal = ({
-  open,
-  setOpen,
+  isOpen,
+  setIsOpen,
   title,
   description,
   body,
   footer,
 }: DialogProps) => {
   return (
-    <DialogRoot modal open={open} onOpenChange={setOpen}>
+    <DialogRoot modal open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           {title && <DialogTitle>{title}</DialogTitle>}

@@ -1,13 +1,6 @@
 import { FieldPath, FieldValues, UseControllerProps } from 'react-hook-form';
 
 import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './Form';
-import {
   SelectContent,
   SelectGroup,
   SelectItem,
@@ -16,6 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/Select';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './Form';
 
 type Props<
   TFieldValues extends FieldValues,
@@ -68,7 +68,6 @@ const SelectField = <
               </SelectGroup>
             </SelectContent>
           </SelectRoot>
-
           <FormMessage />
         </FormItem>
       )}

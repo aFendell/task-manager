@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -14,9 +13,8 @@ import TextField from './forms/TextField';
 import TextareaField from './forms/TextareaField';
 
 type Props = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  taskId?: string;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 };
 
 const formSchema = z.object({
@@ -33,7 +31,7 @@ const defaultValues: CreateTask = {
   description: '',
 };
 
-const TaskForm = ({ open, setOpen }: Props) => {
+const TaskForm = ({ isOpen, setIsOpen }: Props) => {
   const form = useForm<CreateTask>({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -49,7 +47,7 @@ const TaskForm = ({ open, setOpen }: Props) => {
         queryKey: ['getTasks'],
       });
       form.reset();
-      setOpen(false);
+      setIsOpen(false);
     },
   });
 
@@ -57,10 +55,15 @@ const TaskForm = ({ open, setOpen }: Props) => {
     createTask(values);
   };
 
+  const onToggleForm = (open: boolean) => {
+    setIsOpen(open);
+    form.reset();
+  };
+
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      isOpen={isOpen}
+      setIsOpen={onToggleForm}
       title='Edit Task'
       body={
         <Form {...form}>
