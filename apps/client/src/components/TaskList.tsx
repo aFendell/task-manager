@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import * as React from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { TasksAPI } from '../api/methods';
 import * as Params from '../api/params';
@@ -8,8 +8,10 @@ import { TaskStatus } from '../api/types';
 import TaskItem from './TaskItem';
 
 const TaskList = () => {
-  const [status, _setStatus] = useState<TaskStatus | undefined>(undefined);
-  const [search, _setSearch] = useState<string | undefined>(undefined);
+  const [status, _setStatus] = React.useState<TaskStatus | undefined>(
+    undefined
+  );
+  const [search, _setSearch] = React.useState<string | undefined>(undefined);
 
   const TasksFilterParams: Params.TasksFilter = {
     status,
@@ -20,21 +22,10 @@ const TaskList = () => {
     data: tasks,
     isLoading,
     error,
-    refetch: refetchTasks,
   } = useQuery({
     queryKey: ['getTasks', TasksFilterParams],
     queryFn: () => TasksAPI.getTasks(TasksFilterParams),
   });
-
-  const { mutate: deleteTask } = useMutation({
-    mutationKey: ['deleteTask'],
-    mutationFn: (id: string) => TasksAPI.deleteTask(id),
-    onSuccess: () => refetchTasks(),
-  });
-
-  const onEditTask = (_id: string) => {
-    // TODO: edit task feature
-  };
 
   if (isLoading) return <h2>Loading...</h2>;
 
@@ -48,12 +39,7 @@ const TaskList = () => {
         <>
           <ul className='flex flex-col gap-4'>
             {tasks?.map((task) => (
-              <TaskItem
-                key={task.id}
-                {...task}
-                onDelete={deleteTask}
-                onEdit={onEditTask}
-              />
+              <TaskItem key={task.id} {...task} />
             ))}
           </ul>
         </>

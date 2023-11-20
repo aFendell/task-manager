@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from './Dialog';
 
-type DialogProps = {
+export type ModalProps = {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   title?: React.ReactNode;
@@ -24,7 +24,7 @@ export const Modal = ({
   description,
   body,
   footer,
-}: DialogProps) => {
+}: ModalProps) => {
   return (
     <DialogRoot modal open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className='sm:max-w-[425px]'>

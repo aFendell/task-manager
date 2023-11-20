@@ -52,7 +52,9 @@ const SelectField = <
             <FormControl>
               <SelectTrigger
                 withIcon={withIcon}
-                className='w-[112px] justify-center'
+                className={`${
+                  withIcon ? 'w-44 justify-between' : 'w-28 justify-center'
+                }`}
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
