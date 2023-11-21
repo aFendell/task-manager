@@ -4,13 +4,13 @@ import * as z from 'zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { TasksAPI } from '@/api/methods';
-
-import { Button } from './ui/Button';
-import { Modal } from './ui/Modal';
-import { Form } from './forms/Form';
 import { CreateTask } from '@/api/payload';
-import TextField from './forms/TextField';
-import TextareaField from './forms/TextareaField';
+
+import { Button } from '@/components/ui/Button';
+import Modal from '@/components/ui/Modal';
+import { Form } from '@/components/forms/Form';
+import TextField from '@/components/forms/TextField';
+import TextareaField from '@/components/forms/TextareaField';
 
 type Props = {
   isOpen: boolean;

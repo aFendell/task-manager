@@ -1,3 +1,5 @@
+import { FieldPath, FieldValues } from 'react-hook-form';
+
 import {
   FormControl,
   FormField,
@@ -6,12 +8,11 @@ import {
   FormMessage,
 } from './Form';
 import { Textarea } from '../ui/Textarea';
-import { type TextFieldProps } from './TextField';
-import { FieldPath, FieldValues } from 'react-hook-form';
+import type { TextFieldProps } from './TextField';
 
 const TextareaField = <
   TFieldValues extends FieldValues,
-  TName extends FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues>,
 >({
   control,
   name,

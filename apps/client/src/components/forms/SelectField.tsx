@@ -19,7 +19,7 @@ import {
 
 type Props<
   TFieldValues extends FieldValues,
-  TName extends FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues>,
 > = UseControllerProps<TFieldValues, TName> & {
   placeholder?: string;
   title?: string;
@@ -28,11 +28,12 @@ type Props<
     label: string;
   }[];
   withIcon?: boolean;
+  textColor?: string;
 };
 
 const SelectField = <
   TFieldValues extends FieldValues,
-  TName extends FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues>,
 >({
   control,
   name,
@@ -53,7 +54,7 @@ const SelectField = <
               <SelectTrigger
                 withIcon={withIcon}
                 className={`${
-                  withIcon ? 'w-44 justify-between' : 'w-28 justify-center'
+                  withIcon ? 'w-44 justify-between' : `w-28 justify-center`
                 }`}
               >
                 <SelectValue placeholder={placeholder} />

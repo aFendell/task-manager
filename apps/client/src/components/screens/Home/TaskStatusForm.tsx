@@ -8,8 +8,8 @@ import { TasksAPI } from '@/api/methods';
 import { UpdateTaskStatus } from '@/api/payload';
 
 import { TaskStatus } from '@/api/types';
-import { Form } from './forms/Form';
-import SelectField from './forms/SelectField';
+import { Form } from '../../forms/Form';
+import SelectField from '../../forms/SelectField';
 
 const FormSchema = z.object({
   status: z.nativeEnum(TaskStatus),
@@ -45,7 +45,7 @@ const TaskStatusForm = ({ id, taskStatus }: Props) => {
     (values: UpdateTaskStatus) => {
       updateStatus(values);
     },
-    [updateStatus]
+    [updateStatus],
   );
 
   const currentStatus = form.watch('status');
@@ -58,7 +58,7 @@ const TaskStatusForm = ({ id, taskStatus }: Props) => {
 
   return (
     <Form {...form}>
-      <form className='w-2/3 space-y-6'>
+      <form className={`flex w-2/3 space-y-6 text-left`}>
         <SelectField
           items={taskStatusOptions}
           name='status'

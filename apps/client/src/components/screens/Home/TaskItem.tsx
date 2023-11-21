@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { TrashIcon, EditIcon } from 'lucide-react';
 
 import { TasksAPI } from '@/api/methods';
-import type { Task } from '../api/response';
+import type { Task } from '@/api/response';
 
+import ConfirmationModal from '@/components/ui/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
-import { Button, ButtonProps } from './ui/Button';
-import ConfirmationModal from './ui/ConfirmationModal';
+import { Button, ButtonProps } from '@/components/ui/Button';
 
 const TaskItem = ({ id, title, description, status }: Task) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
@@ -32,8 +32,6 @@ const TaskItem = ({ id, title, description, status }: Task) => {
     children: 'Delete',
     onClick: () => {
       deleteTask();
-      console.log('delete: ', id);
-
       setIsDeleteModalOpen(false);
     },
   };
@@ -49,14 +47,13 @@ const TaskItem = ({ id, title, description, status }: Task) => {
   return (
     <>
       <li key={id}>
-        <div className='flex items-center justify-between gap-4 p-4 border border-gray-200 rounded-md'>
-          <div className='flex flex-col flex-grow'>
+        <div className=' flex items-center justify-between gap-4 rounded-md border border-gray-200 p-4'>
+          <div className='flex flex-grow flex-col'>
             <h2 className='text-2xl font-semibold'>{title}</h2>
             <p>{description}</p>
           </div>
           <div className='flex flex-col'>
             <TaskStatusForm taskStatus={status} id={id} />
-
             <div className='flex'>
               <Button variant='ghost' onClick={() => onEdit()}>
                 <EditIcon />

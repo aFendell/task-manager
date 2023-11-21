@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -8,9 +7,9 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className='min-h-screen flex flex-col overflow-x-hidden'>
+    <div className='flex min-h-screen flex-col overflow-x-hidden'>
       <Header />
-      <main className='py-4 px-8 flex flex-col flex-1 max-w-screen-lg container mx-auto'>
+      <main className='container mx-auto flex max-w-screen-lg flex-1 flex-col px-8 py-4'>
         {children}
       </main>
       <Footer />

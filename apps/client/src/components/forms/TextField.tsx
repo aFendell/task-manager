@@ -1,3 +1,5 @@
+import { UseControllerProps, FieldPath, FieldValues } from 'react-hook-form';
+
 import {
   FormControl,
   FormField,
@@ -6,11 +8,10 @@ import {
   FormMessage,
 } from './Form';
 import { Input } from '../ui/Input';
-import { UseControllerProps, FieldPath, FieldValues } from 'react-hook-form';
 
 export type TextFieldProps<
   TFieldValues extends FieldValues,
-  TName extends FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues>,
 > = UseControllerProps<TFieldValues, TName> & {
   placeholder?: string;
   title?: string;
@@ -18,7 +19,7 @@ export type TextFieldProps<
 
 const TextField = <
   TFieldValues extends FieldValues,
-  TName extends FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues>,
 >({
   control,
   name,

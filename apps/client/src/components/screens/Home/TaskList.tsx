@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { TasksAPI } from '../api/methods';
-import * as Params from '../api/params';
-import { TaskStatus } from '../api/types';
+import { TaskStatus } from '@/api/types';
+import { TasksAPI } from '@/api/methods';
+import * as Params from '@/api/params';
 
 import TaskItem from './TaskItem';
 
 const TaskList = () => {
   const [status, _setStatus] = React.useState<TaskStatus | undefined>(
-    undefined
+    undefined,
   );
   const [search, _setSearch] = React.useState<string | undefined>(undefined);
 
@@ -32,19 +32,17 @@ const TaskList = () => {
   if (error) return 'An error has occurred: ' + error.message;
 
   return (
-    <div>
+    <section>
       {!tasks || tasks.length === 0 ? (
         <div>No Tasks To Display</div>
       ) : (
         <>
           <ul className='flex flex-col gap-4'>
-            {tasks?.map((task) => (
-              <TaskItem key={task.id} {...task} />
-            ))}
+            {tasks?.map((task) => <TaskItem key={task.id} {...task} />)}
           </ul>
         </>
       )}
-    </div>
+    </section>
   );
 };
 

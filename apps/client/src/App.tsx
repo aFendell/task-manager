@@ -1,6 +1,7 @@
-import Providers from './Providers';
-import TaskList from './components/TaskList';
+import Providers from './Providers/Providers';
+
 import Layout from './components/layout/Layout';
+import TaskList from './components/screens/Home/TaskList';
 
 const App = () => {
   return (
