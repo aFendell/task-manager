@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { TrashIcon, EditIcon } from 'lucide-react';
+import { Trash, Edit } from 'lucide-react';
 
 import { TasksAPI } from '@/api/methods';
 import type { Task } from '@/api/response';
@@ -55,14 +55,14 @@ const TaskItem = ({ id, title, description, status }: Task) => {
           <div className='flex flex-col'>
             <TaskStatusForm taskStatus={status} id={id} />
             <div className='flex'>
-              <Button variant='ghost' onClick={() => onEdit()}>
-                <EditIcon />
+              <Button disabled variant='ghost' onClick={() => onEdit()}>
+                <Edit />
               </Button>
               <Button
                 variant='ghost'
                 onClick={() => setIsDeleteModalOpen(true)}
               >
-                <TrashIcon />
+                <Trash />
               </Button>
             </div>
           </div>
