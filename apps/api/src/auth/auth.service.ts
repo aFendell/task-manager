@@ -19,7 +19,7 @@ export class AuthService {
     return this.usersRepository.createUser(authCredentialsDto);
   }
 
-  async signIn(authCredentialsDto: AuthCredentialsDto) {
+  async login(authCredentialsDto: AuthCredentialsDto) {
     const { username, password } = authCredentialsDto;
 
     const foundUser = await this.usersRepository.findOneBy({ username });

@@ -8,8 +8,8 @@ import { TasksAPI } from '@/api/methods';
 import { UpdateTaskStatus } from '@/api/payload';
 
 import { TaskStatus } from '@/api/types';
-import { Form } from '../../forms/Form';
-import SelectField from '../../forms/SelectField';
+import { Form } from '../../../components/forms/Form';
+import SelectField from '../../../components/forms/SelectField';
 
 const FormSchema = z.object({
   status: z.nativeEnum(TaskStatus),

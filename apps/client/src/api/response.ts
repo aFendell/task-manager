@@ -8,3 +8,10 @@ export type Task = {
   description: string;
   status: TaskStatus;
 };
+
+export type User = {
+  id: string;
+  username: string;
+  password: string;
+  tasks: Task[];
+};

@@ -47,7 +47,7 @@ const TaskItem = ({ id, title, description, status }: Task) => {
   return (
     <>
       <li key={id}>
-        <div className=' flex items-center justify-between gap-4 rounded-md border border-gray-200 p-4'>
+        <div className='flex items-center justify-between gap-4 rounded-md border border-gray-200 p-4'>
           <div className='flex flex-grow flex-col'>
             <h2 className='text-2xl font-semibold'>{title}</h2>
             <p>{description}</p>
