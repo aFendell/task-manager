@@ -1,4 +1,8 @@
-import { TaskStatus } from './types';
+export enum TaskStatus {
+  OPEN = 'OPEN',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
+}
 
 export type TasksList = Task[];
 
@@ -15,3 +19,5 @@ export type User = {
   password: string;
   tasks: Task[];
 };
+
+export type Token = Record<'accessToken', string>;

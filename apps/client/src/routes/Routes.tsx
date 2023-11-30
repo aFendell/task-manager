@@ -8,6 +8,8 @@ import Screen from '@/screens';
 import Path from './paths';
 import Layout from '@/components/layout/Layout';
 import { absolutePath } from '@/utils/path.utils';
+import PrivateRoute from './PrivateRoute';
+import AnonymousRoute from './AnonymousRoute';
 
 const routes: RouteObject[] = [
   {
@@ -15,20 +17,36 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       {
+        path: '',
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: Path.Tasks,
+            element: <Screen.TaskList />,
+          },
+        ],
+      },
+      {
+        path: '',
+        element: <AnonymousRoute />,
+        children: [
+          {
+            path: Path.SignUp,
+            element: <Screen.SignUp />,
+          },
+          {
+            path: Path.Login,
+            element: <Screen.Login />,
+          },
+        ],
+      },
+      {
+        path: '',
+        element: <Navigate replace to={absolutePath(Path.Tasks)} />,
+      },
+      {
         path: Path.ROOT,
-        element: <Screen.TaskList />,
-      },
-      {
-        path: Path.Tasks,
-        element: <Screen.TaskList />,
-      },
-      {
-        path: Path.SignUp,
-        element: <Screen.SignUp />,
-      },
-      {
-        path: Path.Login,
-        element: <Screen.Login />,
+        element: <Navigate to={absolutePath(Path.Tasks)} />,
       },
       {
         path: Path.ALL,

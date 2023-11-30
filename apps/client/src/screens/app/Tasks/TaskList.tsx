@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { TaskStatus } from '@/api/types';
+import { TaskStatus } from '@/api/response';
 import { TasksAPI } from '@/api/methods';
 import * as Params from '@/api/params';
 

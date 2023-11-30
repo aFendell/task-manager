@@ -1,17 +1,19 @@
+import * as React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { UserPayload } from '@/api/payload';
+import * as Payload from '@/api/payload';
 
 import { Form } from '@/components/forms/Form';
 import TextField from '@/components/forms/TextField';
 import { Button } from '@/components/ui/Button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 
 type Props = {
-  onSubmit: (values: UserPayload) => void;
+  onSubmit: (values: Payload.UserPayload) => void;
   variant: 'signUp' | 'login';
+  isSubmitSuccess: boolean;
 };
 
 const formSchema = z.object({
@@ -23,16 +25,22 @@ const formSchema = z.object({
   }),
 });
 
-const defaultValues: UserPayload = {
+const defaultValues: Payload.UserPayload = {
   username: '',
   password: '',
 };
 
-const AuthForm = ({ onSubmit, variant }: Props) => {
-  const form = useForm<UserPayload>({
+const AuthForm = ({ onSubmit, variant, isSubmitSuccess }: Props) => {
+  const form = useForm<Payload.UserPayload>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+
+  React.useEffect(() => {
+    if (isSubmitSuccess) {
+      form.reset();
+    }
+  }, [form, isSubmitSuccess]);
 
   return (
     <Card className='mx-auto w-96'>

@@ -1,4 +1,4 @@
-import Path from 'routes/paths';
+import Path from '@/routes/paths';
 import qs from 'qs';
 
 /**

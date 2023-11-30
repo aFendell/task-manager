@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { TasksAPI } from '@/api/methods';
 import { UpdateTaskStatus } from '@/api/payload';
 
-import { TaskStatus } from '@/api/types';
+import { TaskStatus } from '@/api/response';
 import { Form } from '../../../components/forms/Form';
 import SelectField from '../../../components/forms/SelectField';
 
