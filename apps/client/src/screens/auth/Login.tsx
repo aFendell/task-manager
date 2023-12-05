@@ -18,7 +18,6 @@ const Login = () => {
     mutationKey: ['createTask'],
     mutationFn: (data: UserPayload) => AuthAPI.login(data),
     onSuccess: (data: Token) => {
-      console.log(data.accessToken);
       setAuth(data);
       setHeaderToken(data.accessToken);
       navigate(absolutePath(Path.Tasks));
