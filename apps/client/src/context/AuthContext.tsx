@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { Token } from '@/api/response';
+import { Auth } from '@/api/response';
+import { useMutation } from '@tanstack/react-query';
+import { setHeaderToken } from '@/api/axiosClient';
+import { AuthAPI } from '@/api/methods';
 
 type AuthContextType = {
-  auth?: Token;
-  setAuth: React.Dispatch<React.SetStateAction<Token | undefined>>;
+  auth?: Auth;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | undefined>>;
   isAuthenticated: boolean;
 };
 
@@ -18,8 +21,36 @@ const AuthContext = React.createContext<AuthContextType>(initialState);
 type Props = React.PropsWithChildren;
 
 export const AuthProvider = ({ children }: Props) => {
-  const [auth, setAuth] = React.useState<Token | undefined>();
+  const [auth, setAuth] = React.useState<Auth | undefined>();
   const isAuthenticated = !!auth?.accessToken;
+
+  const { mutate: refreshTokens } = useMutation({
+    mutationKey: ['refresh', isAuthenticated],
+    mutationFn: () => AuthAPI.refreshTokens(),
+    onSuccess: (data: Auth) => {
+      setAuth(data);
+      setHeaderToken(data.accessToken);
+    },
+    onError: () => {
+      setAuth(undefined);
+    },
+  });
+
+  React.useEffect(() => {
+    let refreshInterval: ReturnType<typeof setInterval>;
+
+    if (isAuthenticated) {
+      refreshInterval = setInterval(
+        () => {
+          setHeaderToken(auth?.refreshToken);
+          refreshTokens();
+        },
+        1000 * 60 * 15 - 5,
+      );
+    }
+
+    return () => clearInterval(refreshInterval);
+  }, [auth?.refreshToken, isAuthenticated, refreshTokens]);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, isAuthenticated }}>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { UserPayload } from '@/api/payload';
 import { AuthAPI } from '@/api/methods';
-import { Token } from '@/api/response';
+import { Auth } from '@/api/response';
 import Path from '@/routes/paths';
 import { absolutePath } from '@/utils/path.utils';
 import useAuthContext from '@/hooks/useAuthContext';
@@ -17,7 +17,7 @@ const Login = () => {
   const { mutate: login, isSuccess } = useMutation({
     mutationKey: ['createTask'],
     mutationFn: (data: UserPayload) => AuthAPI.login(data),
-    onSuccess: (data: Token) => {
+    onSuccess: (data: Auth) => {
       setAuth(data);
       setHeaderToken(data.accessToken);
       navigate(absolutePath(Path.Tasks));

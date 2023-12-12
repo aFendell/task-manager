@@ -17,7 +17,7 @@ export const AuthAPI = {
   },
 
   login: async (data: Payload.UserPayload) => {
-    const token = await axiosClient<Response.Token>({
+    const token = await axiosClient<Response.Auth>({
       url: `${authBaseUrl}/login`,
       method: HTTPMethod.POST,
       data,
@@ -25,6 +25,12 @@ export const AuthAPI = {
 
     return token;
   },
+
+  refreshTokens: () =>
+    axiosClient<Response.Auth>({
+      url: `${authBaseUrl}/refresh-tokens`,
+      method: HTTPMethod.GET,
+    }),
 };
 
 export const TasksAPI = {

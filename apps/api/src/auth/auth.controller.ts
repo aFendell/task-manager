@@ -22,7 +22,7 @@ export class AuthController {
   }
 
   @UseGuards(RefreshTokenGuard)
-  @Get('/refresh')
+  @Get('/refresh-tokens')
   refreshTokens(@GetUser() user: User) {
     return this.authService.refreshTokens(user);
   }
