@@ -20,4 +20,7 @@ export type User = {
   tasks: Task[];
 };
 
-export type Token = Record<'accessToken', string>;
+export type Auth = {
+  accessToken: string;
+  refreshToken: string;
+};
