@@ -1,4 +1,4 @@
-import { TaskStatus } from './types';
+import { TaskStatus } from './response';
 
 export type TasksFilter = {
   status?: TaskStatus;

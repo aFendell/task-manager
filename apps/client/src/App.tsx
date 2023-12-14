@@ -1,14 +1,10 @@
-import Providers from './Providers/Providers';
-
-import Layout from './components/layout/Layout';
-import TaskList from './components/screens/Home/TaskList';
+import Providers from './providers/Providers';
+import Routes from './routes/Routes';
 
 const App = () => {
   return (
     <Providers>
-      <Layout>
-        <TaskList />
-      </Layout>
+      <Routes />
     </Providers>
   );
 };

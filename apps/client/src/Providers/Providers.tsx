@@ -2,6 +2,7 @@ import * as React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from './ThemeProvider';
+import { AuthProvider } from '@/context/AuthContext';
 
 type Props = React.PropsWithChildren<{ withReactQueryDevTools?: boolean }>;
 
@@ -12,8 +13,12 @@ const Providers = ({ children, withReactQueryDevTools = false }: Props) => {
   return (
     <ThemeProvider defaultTheme='dark' storageKey='task-manager-ui-theme'>
       <QueryClientProvider client={queryClient}>
-        {children}
-        {withReactQueryDevTools && <ReactQueryDevtools initialIsOpen={false} />}
+        <AuthProvider>
+          {children}
+          {withReactQueryDevTools && (
+            <ReactQueryDevtools initialIsOpen={false} position='bottom' />
+          )}
+        </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

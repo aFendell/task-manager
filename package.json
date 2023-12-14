@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "start": "node apps/api/dist/main"
+    "migration:run": "cd .apps/api && npm run migration:run",
+    "start": "cd ./apps/api && npm run start"
   },
   "workspaces": [
     "apps/*"
