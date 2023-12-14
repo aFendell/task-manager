@@ -13,13 +13,9 @@ type ThemeProviderState = {
   onSetTheme: (theme: Theme) => void;
 };
 
-const initialState: ThemeProviderState = {
-  theme: 'system',
-  onSetTheme: (_theme) => {},
-};
-
-export const ThemeProviderContext =
-  React.createContext<ThemeProviderState>(initialState);
+export const ThemeProviderContext = React.createContext<ThemeProviderState>(
+  {} as ThemeProviderState,
+);
 
 export function ThemeProvider({
   children,
