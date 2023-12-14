@@ -26,7 +26,7 @@ export const getTypeOrmConfig = (
 
 const typeOrmConfig = getTypeOrmConfig(configService);
 
-export const dataSourceOptions: DataSourceOptions = {
+const dataSourceOptions: DataSourceOptions = {
   ...typeOrmConfig,
 };
 
