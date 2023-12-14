@@ -1,5 +1,6 @@
 import { MoonStar, Sun } from 'lucide-react';
 
+import useTheme from '@/hooks/useTheme';
 import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
@@ -7,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
-import useTheme from '@/hooks/useTheme';
 
 function ToggleMode() {
   const { setTheme } = useTheme();
