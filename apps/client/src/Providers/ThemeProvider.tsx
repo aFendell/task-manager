@@ -10,12 +10,12 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  onSetTheme: (theme: Theme) => void;
 };
 
 const initialState: ThemeProviderState = {
   theme: 'system',
-  setTheme: (_theme) => null,
+  onSetTheme: (_theme) => {},
 };
 
 export const ThemeProviderContext =
@@ -23,9 +23,8 @@ export const ThemeProviderContext =
 
 export function ThemeProvider({
   children,
-  defaultTheme = initialState.theme,
+  defaultTheme = 'system',
   storageKey = 'vite-ui-theme',
-  ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = React.useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
@@ -49,16 +48,13 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
+  const onSetTheme = (theme: Theme) => {
+    localStorage.setItem(storageKey, theme);
+    setTheme(theme);
   };
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={{ theme, onSetTheme }}>
       {children}
     </ThemeProviderContext.Provider>
   );
