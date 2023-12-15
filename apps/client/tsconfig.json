@@ -9,7 +9,7 @@
     /* TailwindCSS */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*", "./dist/*", ""]
+      "@/*": ["src/*"]
     },
 
     /* Bundler mode */
