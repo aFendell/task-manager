@@ -12,7 +12,7 @@ const initialState: ThemeContextType = {
   onSetTheme: (_theme) => null,
 };
 
-export const ThemeContext = React.createContext<ThemeContextType>(initialState);
+const ThemeContext = React.createContext<ThemeContextType>(initialState);
 
 type Props = {
   children: React.ReactNode;
@@ -20,11 +20,11 @@ type Props = {
   storageKey?: string;
 };
 
-export function ThemeProvider({
+export const ThemeProvider = ({
   children,
   defaultTheme = 'system',
   storageKey = 'vite-ui-theme',
-}: Props) {
+}: Props) => {
   const [theme, setTheme] = React.useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
   );
@@ -57,4 +57,6 @@ export function ThemeProvider({
       {children}
     </ThemeContext.Provider>
   );
-}
+};
+
+export default ThemeContext;
