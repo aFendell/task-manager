@@ -1,4 +1,4 @@
-import Providers from 'providers/Providers';
+import Providers from 'Providers';
 import Routes from 'routes/Routes';
 
 const App = () => {
