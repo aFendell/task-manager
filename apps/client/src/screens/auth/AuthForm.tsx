@@ -3,12 +3,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import * as Payload from '@/api/payload';
+import * as Payload from 'api/payload';
 
-import { Form } from '@/components/forms/Form';
-import TextField from '@/components/forms/TextField';
-import { Button } from '@/components/ui/Button';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Form } from 'components/forms/Form';
+import TextField from 'components/forms/TextField';
+import { Button } from 'components/ui/Button';
+import { Card, CardContent, CardHeader } from 'components/ui/Card';
 
 type Props = {
   onSubmit: (values: Payload.UserPayload) => void;

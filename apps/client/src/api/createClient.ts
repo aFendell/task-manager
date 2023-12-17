@@ -5,9 +5,10 @@ import {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+
 import { handleErrorResponse } from './errors';
 import { paramsSerializer, setAuthHeaderFromStorage } from './utils';
-import StorageKey from '@/constants/storage';
+import StorageKey from 'constants/storage';
 import { HTTPMethod } from './types';
 
 const createClient = (instance: AxiosInstance) => {

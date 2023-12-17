@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Trash, Edit } from 'lucide-react';
 
-import { TasksAPI } from '@/api/methods';
-import type { Task } from '@/api/response';
+import { TasksAPI } from 'api/methods';
+import type { Task } from 'api/response';
 
-import ConfirmationModal from '@/components/ui/ConfirmationModal';
+import ConfirmationModal from 'components/ui/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
-import { Button, ButtonProps } from '@/components/ui/Button';
+import { Button, ButtonProps } from 'components/ui/Button';
 
 const TaskItem = ({ id, title, description, status }: Task) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);

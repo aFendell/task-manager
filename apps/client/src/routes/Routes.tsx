@@ -4,10 +4,10 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
-import Screen from '@/screens';
+import Screen from 'screens';
 import Path from './paths';
-import Layout from '@/components/layout/Layout';
-import { absolutePath } from '@/utils/path.utils';
+import Layout from 'components/layout/Layout';
+import { absolutePath } from 'utils/path.utils';
 import PrivateRoute from './PrivateRoute';
 import AnonymousRoute from './AnonymousRoute';
 

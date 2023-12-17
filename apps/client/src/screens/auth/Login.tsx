@@ -1,14 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { UserPayload } from '@/api/payload';
-import { AuthAPI } from '@/api/methods';
-import { Auth } from '@/api/response';
-import Path from '@/routes/paths';
-import { absolutePath } from '@/utils/path.utils';
-import useAuthContext from '@/hooks/useAuthContext';
+import { setHeaderToken } from 'api/axiosClient';
+import { UserPayload } from 'api/payload';
+import { AuthAPI } from 'api/methods';
+import { Auth } from 'api/response';
+
+import Path from 'routes/paths';
+import { absolutePath } from 'utils/path.utils';
+import useAuthContext from 'hooks/useAuthContext';
 import AuthForm from './AuthForm';
-import { setHeaderToken } from '@/api/axiosClient';
 
 const Login = () => {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { TaskStatus } from '@/api/response';
-import { TasksAPI } from '@/api/methods';
-import * as Params from '@/api/params';
+import { TaskStatus } from 'api/response';
+import { TasksAPI } from 'api/methods';
+import * as Params from 'api/params';
 
 import TaskItem from './TaskItem';
 

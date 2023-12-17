@@ -1,13 +1,13 @@
 import { MoonStar, Sun } from 'lucide-react';
 
-import useThemeContext from '@/hooks/useThemeContext';
-import { Button } from '@/components/ui/Button';
+import useThemeContext from 'hooks/useThemeContext';
+import { Button } from 'components/ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
+} from 'components/ui/DropdownMenu';
 
 function ToggleMode() {
   const { onSetTheme } = useThemeContext();
