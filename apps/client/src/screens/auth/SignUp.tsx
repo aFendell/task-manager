@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { UserPayload } from '@/api/payload';
-import { AuthAPI } from '@/api/methods';
+import { UserPayload } from 'api/payload';
+import { AuthAPI } from 'api/methods';
 
-import Path from '@/routes/paths';
-import { absolutePath } from '@/utils/path.utils';
+import Path from 'routes/paths';
+import { absolutePath } from 'utils/path.utils';
 
 import AuthForm from './AuthForm';
 

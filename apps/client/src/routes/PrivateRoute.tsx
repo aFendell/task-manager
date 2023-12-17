@@ -1,6 +1,7 @@
-import useAuthContext from '@/hooks/useAuthContext';
-import { absolutePath } from '@/utils/path.utils';
 import { Navigate, Outlet } from 'react-router-dom';
+
+import useAuthContext from 'hooks/useAuthContext';
+import { absolutePath } from 'utils/path.utils';
 import Path from './paths';
 
 const PrivateRoute = () => {

@@ -1,5 +1,6 @@
-import useAuthContext from '@/hooks/useAuthContext';
 import { Navigate, Outlet } from 'react-router-dom';
+
+import useAuthContext from 'hooks/useAuthContext';
 import Path from './paths';
 
 const AnonymousRoute = () => {

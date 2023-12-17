@@ -1,10 +1,10 @@
 import * as React from 'react';
-
-import { Button } from '@/components/ui/Button';
-import TaskForm from '@/screens/app/Tasks/TaskForm';
-import ToggleMode from '@/components/ui/ToggleMode';
 import { NavLink, useLocation } from 'react-router-dom';
-import Path from '@/routes/paths';
+
+import Path from 'routes/paths';
+import TaskForm from 'screens/app/Tasks/TaskForm';
+import { Button } from 'components/ui/Button';
+import ToggleMode from 'components/ui/ToggleMode';
 
 const Header = () => {
   const { pathname } = useLocation();

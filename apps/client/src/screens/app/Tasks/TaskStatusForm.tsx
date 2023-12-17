@@ -4,12 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { TasksAPI } from '@/api/methods';
-import { UpdateTaskStatus } from '@/api/payload';
+import { TasksAPI } from 'api/methods';
+import { UpdateTaskStatus } from 'api/payload';
 
-import { TaskStatus } from '@/api/response';
-import { Form } from '../../../components/forms/Form';
-import SelectField from '../../../components/forms/SelectField';
+import { TaskStatus } from 'api/response';
+
+import { Form } from 'components/forms/Form';
+import SelectField from 'components/forms/SelectField';
 
 const FormSchema = z.object({
   status: z.nativeEnum(TaskStatus),

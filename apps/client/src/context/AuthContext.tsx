@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Auth } from '@/api/response';
 import { useMutation } from '@tanstack/react-query';
-import { setHeaderToken } from '@/api/axiosClient';
-import { AuthAPI } from '@/api/methods';
+
+import { Auth } from 'api/response';
+import { setHeaderToken } from 'api/axiosClient';
+import { AuthAPI } from 'api/methods';
 
 type AuthContextType = {
   auth?: Auth;

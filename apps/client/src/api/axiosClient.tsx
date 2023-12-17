@@ -1,5 +1,5 @@
 import axios from 'axios';
-import environment from '@/constants/config';
+import environment from 'constants/config';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import createClient, { createAuthHeaderSetter } from './createClient';
 

@@ -1,16 +1,16 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
-import { TasksAPI } from '@/api/methods';
-import { CreateTask } from '@/api/payload';
+import { TasksAPI } from 'api/methods';
+import { CreateTask } from 'api/payload';
 
-import { Button } from '@/components/ui/Button';
-import Modal from '@/components/ui/Modal';
-import { Form } from '@/components/forms/Form';
-import TextField from '@/components/forms/TextField';
-import TextareaField from '@/components/forms/TextareaField';
+import { Button } from 'components/ui/Button';
+import Modal from 'components/ui/Modal';
+import { Form } from 'components/forms/Form';
+import TextField from 'components/forms/TextField';
+import TextareaField from 'components/forms/TextareaField';
 
 type Props = {
   isOpen: boolean;
