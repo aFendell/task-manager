@@ -4,13 +4,13 @@ import * as Response from './response';
 import * as Payload from './payload';
 import { HTTPMethod } from './types';
 
-const tasksBaseUrl = '/tasks';
-const authBaseUrl = '/auth';
+const tasksUrl = '/tasks';
+const authUrl = '/auth';
 
 export const AuthAPI = {
   signUp: async (data: Payload.UserPayload) => {
     await axiosClient<void>({
-      url: `${authBaseUrl}/signup`,
+      url: `${authUrl}/signup`,
       method: HTTPMethod.POST,
       data,
     });
@@ -18,7 +18,7 @@ export const AuthAPI = {
 
   login: async (data: Payload.UserPayload) => {
     const token = await axiosClient<Response.Auth>({
-      url: `${authBaseUrl}/login`,
+      url: `${authUrl}/login`,
       method: HTTPMethod.POST,
       data,
     });
@@ -28,7 +28,7 @@ export const AuthAPI = {
 
   refreshTokens: () =>
     axiosClient<Response.Auth>({
-      url: `${authBaseUrl}/refresh-tokens`,
+      url: `${authUrl}/refresh-tokens`,
       method: HTTPMethod.GET,
     }),
 };
@@ -36,7 +36,7 @@ export const AuthAPI = {
 export const TasksAPI = {
   getTasks: async (params?: Params.TasksFilter) => {
     const tasks = await axiosClient<Response.TasksList>({
-      url: tasksBaseUrl,
+      url: tasksUrl,
       method: HTTPMethod.GET,
       params,
     });
@@ -46,7 +46,7 @@ export const TasksAPI = {
 
   createTask: async (data: Payload.CreateTask) => {
     const task = await axiosClient<Response.Task>({
-      url: tasksBaseUrl,
+      url: tasksUrl,
       method: HTTPMethod.POST,
       data,
     });
@@ -56,7 +56,7 @@ export const TasksAPI = {
 
   getTaskById: async (id: string) => {
     const task = await axiosClient<Response.Task>({
-      url: `${tasksBaseUrl}/${id}`,
+      url: `${tasksUrl}/${id}`,
       method: HTTPMethod.GET,
     });
 
@@ -65,14 +65,14 @@ export const TasksAPI = {
 
   deleteTask: async (id: string) => {
     await axiosClient<void>({
-      url: `${tasksBaseUrl}/${id}`,
+      url: `${tasksUrl}/${id}`,
       method: HTTPMethod.DELETE,
     });
   },
 
   updateTaskStatus: async (id: string, data: Payload.UpdateTaskStatus) => {
     const task = await axiosClient<Response.Task>({
-      url: `${tasksBaseUrl}/${id}/status`,
+      url: `${tasksUrl}/${id}/status`,
       method: HTTPMethod.PATCH,
       data,
     });
