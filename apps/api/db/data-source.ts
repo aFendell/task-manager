@@ -16,12 +16,12 @@ export const getTypeOrmConfig = (
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_NAME'),
   entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/db/migrations/**/*.js'],
+  // migrations: ['dist/db/migrations/**/*.js'],
   extra: {
     charset: 'utf8mb4_unicode_ci',
   },
   logging: true,
-  synchronize: false,
+  synchronize: true,
 });
 
 const typeOrmConfig = getTypeOrmConfig(configService);
