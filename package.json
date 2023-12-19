@@ -6,7 +6,8 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "migration:run": "cd .apps/api && npm run migration:run",
-    "start": "cd ./apps/api && npm run start"
+    "start": "cd ./apps/api && npm run start",
+    "migrate:start:prod": "cd ./apps/api && npm run migration:run:prod && npm run start:prod"
   },
   "workspaces": [
     "apps/*"
