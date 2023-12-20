@@ -5,12 +5,14 @@ import { Trash, Edit } from 'lucide-react';
 import { TasksAPI } from 'api/methods';
 import type { Task } from 'api/response';
 
+import { useToast } from 'hooks/useToast';
 import ConfirmationModal from 'components/modals/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
 import { Button, ButtonProps } from 'components/ui/Button';
 
 const TaskItem = ({ id, title, description, status }: Task) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+  const { toast } = useToast();
 
   const queryClient = useQueryClient();
 
@@ -20,6 +22,13 @@ const TaskItem = ({ id, title, description, status }: Task) => {
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['getTasks'],
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Delete Error',
+        description: `Could not delete task. ${error.message}`,
+        variant: 'destructive',
       });
     },
   });

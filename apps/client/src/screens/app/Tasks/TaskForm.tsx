@@ -11,6 +11,7 @@ import Modal from 'components/modals/Modal';
 import { Form } from 'components/forms/Form';
 import TextField from 'components/forms/TextField';
 import TextareaField from 'components/forms/TextareaField';
+import { useToast } from 'hooks/useToast';
 
 type Props = {
   isOpen: boolean;
@@ -32,6 +33,8 @@ const defaultValues: CreateTask = {
 };
 
 const TaskForm = ({ isOpen, setIsOpen }: Props) => {
+  const { toast } = useToast();
+
   const form = useForm<CreateTask>({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -48,6 +51,13 @@ const TaskForm = ({ isOpen, setIsOpen }: Props) => {
       });
       form.reset();
       setIsOpen(false);
+    },
+    onError: (error) => {
+      toast({
+        title: 'Error Creating task',
+        description: `There was an error while creating new task: ${error?.message}`,
+        variant: 'destructive',
+      });
     },
   });
 
