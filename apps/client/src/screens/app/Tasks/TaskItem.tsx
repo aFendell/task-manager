@@ -56,12 +56,12 @@ const TaskItem = ({ id, title, description, status }: Task) => {
   return (
     <>
       <li key={id}>
-        <div className='flex items-center justify-between gap-4 rounded-md border border-gray-200 p-4'>
-          <div className='flex flex-grow flex-col'>
+        <div className='flex justify-between gap-4 rounded-md border border-gray-200 p-4'>
+          <div className='flex flex-grow flex-col gap-y-2'>
             <h2 className='text-2xl font-semibold'>{title}</h2>
-            <p>{description}</p>
+            <p className='mt-auto flex-grow'>{description}</p>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col gap-y-2'>
             <TaskStatusForm taskStatus={status} id={id} />
             <div className='flex'>
               <Button disabled variant='ghost' onClick={() => onEdit()}>
