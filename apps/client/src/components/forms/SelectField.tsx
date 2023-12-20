@@ -47,7 +47,7 @@ const SelectField = <
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className='space-y-0'>
           <FormLabel>{title}</FormLabel>
           <SelectRoot onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
