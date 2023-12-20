@@ -11,6 +11,7 @@ import { TaskStatus } from 'api/response';
 
 import { Form } from 'components/forms/Form';
 import SelectField from 'components/forms/SelectField';
+import { useToast } from 'hooks/useToast';
 
 const FormSchema = z.object({
   status: z.nativeEnum(TaskStatus),
@@ -27,6 +28,8 @@ type Props = {
 };
 
 const TaskStatusForm = ({ id, taskStatus }: Props) => {
+  const { toast } = useToast();
+
   const form = useForm<UpdateTaskStatus>({
     resolver: zodResolver(FormSchema),
     defaultValues: { status: taskStatus },
@@ -39,6 +42,13 @@ const TaskStatusForm = ({ id, taskStatus }: Props) => {
     mutationFn: (data: UpdateTaskStatus) => TasksAPI.updateTaskStatus(id, data),
     onSuccess: (task) => {
       queryClient.setQueryData(['getTasks', id], task);
+    },
+    onError: (error) => {
+      toast({
+        title: 'Status Update Error',
+        description: `Could not update task status. ${error.message}`,
+        variant: 'destructive',
+      });
     },
   });
 

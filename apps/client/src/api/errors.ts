@@ -9,7 +9,7 @@ const errors: Record<StatusCode, string> = {
   [StatusCode.NOT_FOUND]:
     'The requested content does not exist, please try something else',
   [StatusCode.FORBIDDEN]: 'You are not allowed to access this content',
-  [StatusCode.UNAUTHORIZED]: 'You should login in order to access this content',
+  [StatusCode.UNAUTHORIZED]: 'Please check your credentials.',
 };
 
 export function handleErrorResponse(

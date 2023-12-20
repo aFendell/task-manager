@@ -13,16 +13,27 @@ import { Card, CardContent, CardHeader } from 'components/ui/Card';
 type Props = {
   onSubmit: (values: Payload.UserPayload) => void;
   variant: 'signUp' | 'login';
-  isSubmitSuccess: boolean;
+  submitCount: number;
 };
 
 const formSchema = z.object({
-  username: z.string().min(2, {
+  username: z.string().min(4, {
     message: 'Username must be at least 4 characters.',
   }),
-  password: z.string().min(2, {
-    message: 'Password must be at least 8 characters.',
-  }),
+  password: z
+    .string()
+    .min(8, {
+      message: 'Password must be at least 8 characters.',
+    })
+    .refine((password) => /[A-Z]/.test(password), {
+      message: 'Password must contain at least one uppercase letter',
+    })
+    .refine((password) => /[a-z]/.test(password), {
+      message: 'Password must contain at least one lowercase letter',
+    })
+    .refine((password) => /\d/.test(password), {
+      message: 'Password must contain at least one number',
+    }),
 });
 
 const defaultValues: Payload.UserPayload = {
@@ -30,17 +41,17 @@ const defaultValues: Payload.UserPayload = {
   password: '',
 };
 
-const AuthForm = ({ onSubmit, variant, isSubmitSuccess }: Props) => {
+const AuthForm = ({ onSubmit, variant, submitCount }: Props) => {
   const form = useForm<Payload.UserPayload>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
   React.useEffect(() => {
-    if (isSubmitSuccess) {
+    if (submitCount !== 0) {
       form.reset();
     }
-  }, [form, isSubmitSuccess]);
+  }, [form, submitCount]);
 
   return (
     <Card className='mx-auto w-96'>
