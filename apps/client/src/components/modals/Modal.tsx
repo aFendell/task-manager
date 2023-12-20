@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {
   DialogContent,
   DialogDescription,
@@ -6,7 +7,7 @@ import {
   DialogHeader,
   DialogRoot,
   DialogTitle,
-} from './Dialog';
+} from '../ui/Dialog';
 
 export type ModalProps = {
   isOpen: boolean;
@@ -33,7 +34,6 @@ export const Modal = ({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         {body && <div className='grid gap-4 py-4'>{body}</div>}
-
         {footer && <DialogFooter>{footer}</DialogFooter>}
       </DialogContent>
     </DialogRoot>

@@ -7,7 +7,7 @@ import { TasksAPI } from 'api/methods';
 import { CreateTask } from 'api/payload';
 
 import { Button } from 'components/ui/Button';
-import Modal from 'components/ui/Modal';
+import Modal from 'components/modals/Modal';
 import { Form } from 'components/forms/Form';
 import TextField from 'components/forms/TextField';
 import TextareaField from 'components/forms/TextareaField';
@@ -80,7 +80,6 @@ const TaskForm = ({ isOpen, setIsOpen }: Props) => {
               placeholder='Task Description'
               title='Description'
             />
-
             <Button type='submit'>Submit</Button>
           </form>
         </Form>

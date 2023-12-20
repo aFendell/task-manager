@@ -1,37 +1,95 @@
 import * as React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import Path from 'routes/paths';
 import TaskForm from 'screens/app/Tasks/TaskForm';
-import { Button } from 'components/ui/Button';
+import { Button, ButtonProps } from 'components/ui/Button';
 import ToggleMode from 'components/ui/ToggleMode';
+import useAuthContext from 'hooks/useAuthContext';
+import ConfirmationModal from 'components/modals/ConfirmationModal';
+import { useMutation } from '@tanstack/react-query';
+import { AuthAPI } from 'api/methods';
+import { setHeaderToken } from 'api/axiosClient';
+import { absolutePath } from 'utils/path.utils';
 
 const Header = () => {
   const { pathname } = useLocation();
-
+  const navigate = useNavigate();
   const [isTaskForm, setIsTaskForm] = React.useState(false);
+  const [isConfirmationModal, setIsConfirmationModal] = React.useState(false);
+
+  const isSignUpUrl = pathname.includes(Path.SignUp);
+  const { isAuthenticated, setAuth } = useAuthContext();
+
+  const { mutate: logout } = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: () => AuthAPI.logout(),
+    onSuccess: () => {
+      setAuth(null);
+      setHeaderToken();
+      navigate(absolutePath(Path.Login));
+    },
+    onError: () => {
+      // TODO: add error notification
+      setAuth(null);
+      setHeaderToken();
+      navigate(absolutePath(Path.Login));
+    },
+  });
+
+  const confirmLogoutProps: ButtonProps = {
+    children: 'Logout',
+    onClick: () => {
+      console.log('logout');
+      logout();
+      setIsConfirmationModal(false);
+    },
+  };
+
+  const cancelLogoutProps: ButtonProps = {
+    children: 'Cancel',
+    onClick: () => {
+      setIsConfirmationModal(false);
+    },
+    variant: 'secondary',
+  };
+
   return (
     <header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-16 w-full items-center justify-between'>
-        {pathname.includes(Path.Tasks) ? (
-          <Button onClick={() => setIsTaskForm(true)}>Create Task</Button>
-        ) : pathname.includes(Path.SignUp) ? (
-          <Button>
-            <NavLink replace to={`/${Path.Login}`}>
-              Login
-            </NavLink>
-          </Button>
+        {isAuthenticated ? (
+          <nav className='flex w-full justify-between border'>
+            <Button onClick={() => setIsTaskForm(true)}>Create Task</Button>
+            <Button onClick={() => setIsConfirmationModal(true)}>Logout</Button>
+          </nav>
         ) : (
-          <Button>
-            <NavLink replace to={`/${Path.SignUp}`}>
-              Sign Up
-            </NavLink>
-          </Button>
+          <nav>
+            {isSignUpUrl ? (
+              <Button>
+                <NavLink replace to={`/${Path.Login}`}>
+                  Login
+                </NavLink>
+              </Button>
+            ) : (
+              <Button>
+                <NavLink replace to={`/${Path.SignUp}`}>
+                  Sign Up
+                </NavLink>
+              </Button>
+            )}
+          </nav>
         )}
 
         <ToggleMode />
       </div>
       <TaskForm isOpen={isTaskForm} setIsOpen={setIsTaskForm} />
+      <ConfirmationModal
+        isOpen={isConfirmationModal}
+        setIsOpen={setIsConfirmationModal}
+        actions={[cancelLogoutProps, confirmLogoutProps]}
+        title='Logout'
+        body='Are you sure you wish to logout?'
+      />
     </header>
   );
 };

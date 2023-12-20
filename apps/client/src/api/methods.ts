@@ -17,20 +17,30 @@ export const AuthAPI = {
   },
 
   login: async (data: Payload.UserPayload) => {
-    const token = await axiosClient<Response.Auth>({
+    const tokens = await axiosClient<Response.Auth>({
       url: `${authUrl}/login`,
       method: HTTPMethod.POST,
       data,
     });
 
-    return token;
+    return tokens;
   },
 
-  refreshTokens: () =>
-    axiosClient<Response.Auth>({
+  refreshTokens: async () => {
+    const tokens = await axiosClient<Response.Auth>({
       url: `${authUrl}/refresh-tokens`,
       method: HTTPMethod.GET,
-    }),
+    });
+
+    return tokens;
+  },
+
+  logout: async () => {
+    await axiosClient<void>({
+      url: `${authUrl}/logout`,
+      method: HTTPMethod.GET,
+    });
+  },
 };
 
 export const TasksAPI = {
