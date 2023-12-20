@@ -1,17 +1,23 @@
-import { Button, type ButtonProps } from './Button';
+import { Button, type ButtonProps } from '../ui/Button';
 import { Modal, type ModalProps } from './Modal';
 
 type Props = ModalProps & {
   actions: ButtonProps[];
 };
 
-const ConfirmationModal = ({ isOpen, setIsOpen, actions }: Props) => {
+const ConfirmationModal = ({
+  isOpen,
+  setIsOpen,
+  actions,
+  title,
+  body,
+}: Props) => {
   return (
     <Modal
       isOpen={isOpen}
       setIsOpen={setIsOpen}
-      title='Delete Task'
-      body='Are you sure you want to delete this task?'
+      title={title}
+      body={body}
       footer={
         <>
           {actions.map((buttonProps, i) => (

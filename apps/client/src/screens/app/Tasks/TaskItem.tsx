@@ -5,7 +5,7 @@ import { Trash, Edit } from 'lucide-react';
 import { TasksAPI } from 'api/methods';
 import type { Task } from 'api/response';
 
-import ConfirmationModal from 'components/ui/ConfirmationModal';
+import ConfirmationModal from 'components/modals/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
 import { Button, ButtonProps } from 'components/ui/Button';
 
@@ -72,6 +72,8 @@ const TaskItem = ({ id, title, description, status }: Task) => {
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         actions={[cancelDeleteProps, confirmDeleteProps]}
+        title='Delete Task'
+        body='Are you sure you want to delete this task?'
       />
     </>
   );

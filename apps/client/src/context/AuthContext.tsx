@@ -6,13 +6,13 @@ import { setHeaderToken } from 'api/axiosClient';
 import { AuthAPI } from 'api/methods';
 
 type AuthContextType = {
-  auth?: Auth;
-  setAuth: React.Dispatch<React.SetStateAction<Auth | undefined>>;
+  auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
   isAuthenticated: boolean;
 };
 
 const initialState: AuthContextType = {
-  auth: undefined,
+  auth: null,
   setAuth: () => null,
   isAuthenticated: false,
 };
@@ -22,7 +22,7 @@ const AuthContext = React.createContext<AuthContextType>(initialState);
 type Props = React.PropsWithChildren;
 
 export const AuthProvider = ({ children }: Props) => {
-  const [auth, setAuth] = React.useState<Auth | undefined>();
+  const [auth, setAuth] = React.useState<Auth | null>(null);
   const isAuthenticated = !!auth?.accessToken;
 
   const { mutate: refreshTokens } = useMutation({
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: Props) => {
       setHeaderToken(data.accessToken);
     },
     onError: () => {
-      setAuth(undefined);
+      setAuth(null);
     },
   });
 
