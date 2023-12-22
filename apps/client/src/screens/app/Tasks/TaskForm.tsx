@@ -74,7 +74,7 @@ const TaskForm = ({ isOpen, setIsOpen }: Props) => {
     <Modal
       isOpen={isOpen}
       setIsOpen={onToggleForm}
-      title='Edit Task'
+      title='Create Task'
       body={
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>

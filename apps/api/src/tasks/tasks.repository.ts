@@ -30,6 +30,8 @@ export class TasksRepository extends Repository<Task> {
       );
     }
 
+    query.orderBy({ 'task.updatedAt': 'DESC' });
+
     const tasks = await query.getMany();
 
     return tasks;

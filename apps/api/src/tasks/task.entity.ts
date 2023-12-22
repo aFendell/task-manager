@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { User } from 'src/auth/user.entity';
 import { Exclude } from 'class-transformer';
@@ -20,4 +27,19 @@ export class Task {
   @ManyToOne((_type) => User, (user) => user.tasks, { eager: false })
   @Exclude({ toPlainOnly: true })
   user: User;
+
+  @CreateDateColumn({
+    type: 'timestamp with time zone',
+    precision: 3,
+    default: () => 'NOW()',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp with time zone',
+    precision: 3,
+    default: () => 'NOW()',
+    onUpdate: 'NOW()',
+  })
+  updatedAt: Date;
 }
