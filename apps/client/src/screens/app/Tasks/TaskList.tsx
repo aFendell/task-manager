@@ -6,6 +6,7 @@ import { TasksAPI } from 'api/methods';
 import * as Params from 'api/params';
 
 import TaskItem from './TaskItem';
+import LoadingSpinner from 'components/ui/LoadingSpinner';
 
 const TaskList = () => {
   const [status, _setStatus] = React.useState<TaskStatus | undefined>(
@@ -27,7 +28,7 @@ const TaskList = () => {
     queryFn: () => TasksAPI.getTasks(TasksFilterParams),
   });
 
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <LoadingSpinner className='m-auto' size={60} />;
 
   if (error) return <h2>An error has occurred: {error.message}</h2>;
 
