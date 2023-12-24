@@ -29,7 +29,7 @@ const TaskList = () => {
 
   if (isLoading) return <h2>Loading...</h2>;
 
-  if (error) return 'An error has occurred: ' + error.message;
+  if (error) return <h2>An error has occurred: {error.message}</h2>;
 
   return (
     <section>
