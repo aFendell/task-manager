@@ -22,7 +22,6 @@ import { getTypeOrmConfig } from 'db/data-source';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../..', 'client', 'dist'),
-      renderPath: '/',
     }),
     AuthModule,
     TasksModule,
