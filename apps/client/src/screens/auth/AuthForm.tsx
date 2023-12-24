@@ -54,7 +54,7 @@ const AuthForm = ({ onSubmit, variant, submitCount }: Props) => {
   }, [form, submitCount]);
 
   return (
-    <Card className='mx-auto w-96'>
+    <Card className='mx-auto w-full max-w-96'>
       <CardHeader>{variant === 'signUp' ? 'Sign Up' : 'Login'}</CardHeader>
       <CardContent>
         <Form {...form}>
