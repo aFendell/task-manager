@@ -6,9 +6,9 @@ import { TasksAPI } from 'api/methods';
 import type { Task } from 'api/response';
 
 import { useToast } from 'hooks/useToast';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
+import ConfirmationModal, { Action } from 'components/modals/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
-import { Button, ButtonProps } from 'components/ui/Button';
+import { Button } from 'components/ui/Button';
 
 const TaskItem = ({ id, title, description, status }: Task) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
@@ -37,16 +37,18 @@ const TaskItem = ({ id, title, description, status }: Task) => {
     // TODO: edit task feature
   };
 
-  const confirmDeleteProps: ButtonProps = {
+  const confirmDeleteProps: Action = {
     children: 'Delete',
+    key: 'delete',
     onClick: () => {
       deleteTask();
       setIsDeleteModalOpen(false);
     },
   };
 
-  const cancelDeleteProps: ButtonProps = {
+  const cancelDeleteProps: Action = {
     children: 'Cancel',
+    key: 'cancel',
     onClick: () => {
       setIsDeleteModalOpen(false);
     },

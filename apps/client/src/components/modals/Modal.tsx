@@ -28,7 +28,7 @@ export const Modal = ({
 }: ModalProps) => {
   return (
     <DialogRoot modal open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='max-w-xs rounded-md sm:max-w-md'>
         <DialogHeader>
           {title && <DialogTitle>{title}</DialogTitle>}
           {description && <DialogDescription>{description}</DialogDescription>}

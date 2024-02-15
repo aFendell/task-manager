@@ -77,7 +77,10 @@ const TaskForm = ({ isOpen, setIsOpen }: Props) => {
       title='Create Task'
       body={
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='flex flex-col space-y-8'
+          >
             <TextField
               name='title'
               control={form.control}

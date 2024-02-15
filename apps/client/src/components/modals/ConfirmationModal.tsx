@@ -1,8 +1,12 @@
 import { Button, type ButtonProps } from '../ui/Button';
 import { Modal, type ModalProps } from './Modal';
 
+export type Action = ButtonProps & {
+  key: string;
+};
+
 type Props = ModalProps & {
-  actions: ButtonProps[];
+  actions: Action[];
 };
 
 const ConfirmationModal = ({
@@ -20,8 +24,8 @@ const ConfirmationModal = ({
       body={body}
       footer={
         <>
-          {actions.map((buttonProps, i) => (
-            <Button key={buttonProps.value + i.toString()} {...buttonProps} />
+          {actions.map((action) => (
+            <Button {...action} />
           ))}
         </>
       }

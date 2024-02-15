@@ -3,10 +3,10 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import Path from 'routes/paths';
 import TaskForm from 'screens/app/Tasks/TaskForm';
-import { Button, ButtonProps } from 'components/ui/Button';
+import { Button } from 'components/ui/Button';
 import ToggleMode from 'components/ui/ToggleMode';
 import useAuthContext from 'hooks/useAuthContext';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
+import ConfirmationModal, { Action } from 'components/modals/ConfirmationModal';
 import { useMutation } from '@tanstack/react-query';
 import { AuthAPI } from 'api/methods';
 import { setHeaderToken } from 'api/axiosClient';
@@ -47,16 +47,18 @@ const Header = () => {
     onError: (error) => onLogoutError(error),
   });
 
-  const confirmLogoutProps: ButtonProps = {
+  const confirmLogoutProps: Action = {
     children: 'Logout',
+    key: 'logout',
     onClick: () => {
       logout();
       setIsConfirmationModal(false);
     },
   };
 
-  const cancelLogoutProps: ButtonProps = {
+  const cancelLogoutProps: Action = {
     children: 'Cancel',
+    key: 'cancel',
     onClick: () => {
       setIsConfirmationModal(false);
     },
