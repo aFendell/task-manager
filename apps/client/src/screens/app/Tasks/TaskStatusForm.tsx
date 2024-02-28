@@ -52,20 +52,15 @@ const TaskStatusForm = ({ id, taskStatus }: Props) => {
     },
   });
 
-  const onSubmit = React.useCallback(
-    (values: UpdateTaskStatus) => {
-      updateStatus(values);
-    },
-    [updateStatus],
-  );
-
   const currentStatus = form.watch('status');
 
   React.useEffect(() => {
-    if (currentStatus !== undefined) {
-      form.handleSubmit(onSubmit)();
-    }
-  }, [form, onSubmit, currentStatus]);
+    if (!currentStatus) return;
+    const onSubmit = (values: UpdateTaskStatus) => {
+      updateStatus(values);
+    };
+    form.handleSubmit(onSubmit)();
+  }, [currentStatus, form, updateStatus]);
 
   return (
     <Form {...form}>
@@ -75,7 +70,6 @@ const TaskStatusForm = ({ id, taskStatus }: Props) => {
           name='status'
           control={form.control}
           withIcon={false}
-          defaultValue={currentStatus}
         />
       </form>
     </Form>

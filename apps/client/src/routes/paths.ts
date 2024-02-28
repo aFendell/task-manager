@@ -4,7 +4,8 @@ enum Path {
   NotFound = '404',
   Login = 'login',
   SignUp = 'signup',
-  Tasks = 'tasks',
+  TasksList = 'tasks/list',
+  TasksBoard = 'tasks/board',
 }
 
 export default Path;

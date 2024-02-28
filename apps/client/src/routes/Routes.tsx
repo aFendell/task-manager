@@ -21,8 +21,12 @@ const routes: RouteObject[] = [
         element: <PrivateRoute />,
         children: [
           {
-            path: Path.Tasks,
+            path: Path.TasksList,
             element: <Screen.TaskList />,
+          },
+          {
+            path: Path.TasksBoard,
+            element: <Screen.Board />,
           },
         ],
       },
@@ -42,11 +46,11 @@ const routes: RouteObject[] = [
       },
       {
         path: '',
-        element: <Navigate replace to={absolutePath(Path.Tasks)} />,
+        element: <Navigate replace to={absolutePath(Path.TasksBoard)} />,
       },
       {
         path: Path.ROOT,
-        element: <Navigate to={absolutePath(Path.Tasks)} />,
+        element: <Navigate to={absolutePath(Path.TasksBoard)} />,
       },
       {
         path: Path.ALL,

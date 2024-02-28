@@ -24,6 +24,8 @@ const Header = () => {
   const isSignUpUrl = pathname.includes(Path.SignUp);
   const { isAuthenticated, setAuth } = useAuthContext();
 
+  const isTasksBoardUrl = pathname.includes(Path.TasksBoard);
+
   const onLogoutSuccess = () => {
     setAuth(null);
     setHeaderToken();
@@ -71,18 +73,28 @@ const Header = () => {
         {isAuthenticated ? (
           <nav className='flex w-full justify-between'>
             <Button onClick={() => setIsTaskForm(true)}>Create Task</Button>
+            <Button asChild>
+              <NavLink
+                replace
+                to={
+                  isTasksBoardUrl ? `/${Path.TasksList}` : `/${Path.TasksBoard}`
+                }
+              >
+                {isTasksBoardUrl ? 'List' : 'Board'}
+              </NavLink>
+            </Button>
             <Button onClick={() => setIsConfirmationModal(true)}>Logout</Button>
           </nav>
         ) : (
           <nav>
             {isSignUpUrl ? (
-              <Button>
+              <Button asChild>
                 <NavLink replace to={`/${Path.Login}`}>
                   Login
                 </NavLink>
               </Button>
             ) : (
-              <Button>
+              <Button asChild>
                 <NavLink replace to={`/${Path.SignUp}`}>
                   Sign Up
                 </NavLink>

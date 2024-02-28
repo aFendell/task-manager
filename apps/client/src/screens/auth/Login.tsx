@@ -22,7 +22,7 @@ const Login = () => {
   const onSuccess = (data: Auth) => {
     setAuth(data);
     setHeaderToken(data.accessToken);
-    navigate(absolutePath(Path.Tasks));
+    navigate(absolutePath(Path.TasksBoard));
     setSubmitCount((prevState) => prevState + 1);
   };
 

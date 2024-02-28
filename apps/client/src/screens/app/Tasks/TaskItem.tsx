@@ -1,47 +1,27 @@
 import * as React from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Trash, Edit } from 'lucide-react';
 
-import { TasksAPI } from 'api/methods';
 import type { Task } from 'api/response';
 
-import { useToast } from 'hooks/useToast';
 import ConfirmationModal, { Action } from 'components/modals/ConfirmationModal';
 import TaskStatusForm from './TaskStatusForm';
 import { Button } from 'components/ui/Button';
+import useDeleteTask from 'hooks/useDeleteTask';
 
 const TaskItem = ({ id, title, description, status }: Task) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-  const { toast } = useToast();
-
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteTask } = useMutation({
-    mutationKey: ['deleteTask'],
-    mutationFn: () => TasksAPI.deleteTask(id),
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ['getTasks'],
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: 'Delete Error',
-        description: `Could not delete task. ${error.message}`,
-        variant: 'destructive',
-      });
-    },
-  });
 
   const onEdit = () => {
     // TODO: edit task feature
   };
 
+  const { deleteTask } = useDeleteTask();
+
   const confirmDeleteProps: Action = {
     children: 'Delete',
     key: 'delete',
     onClick: () => {
-      deleteTask();
+      deleteTask(id);
       setIsDeleteModalOpen(false);
     },
   };
